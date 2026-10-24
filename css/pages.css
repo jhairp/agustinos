@@ -316,6 +316,27 @@
 /* ==========================================================================
    MEDIA QUERIES ESPECÍFICAS DE PÁGINAS
    ========================================================================== */
+.news-filter-box {
+  background: var(--clr-surface);
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.news-search-wrap {
+  position: relative;
+  flex: 1;
+  min-width: min(220px, 100%);
+  max-width: 380px;
+}
+
 @media (max-width: 1024px) {
   .communities-grid,
   .saints-grid {
@@ -333,6 +354,17 @@
   .saints-grid,
   .form-grid {
     grid-template-columns: 1fr;
+  }
+
+  .news-filter-box {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1rem;
+  }
+
+  .news-search-wrap {
+    width: 100%;
+    max-width: 100%;
   }
 
   /* El badge flotante "+90 Años" se adapta sin salirse en pantallas pequeñas */

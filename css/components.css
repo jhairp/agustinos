@@ -437,16 +437,17 @@
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   z-index: 2100;
-  display: flex;
+  display: none; /* Asegura que no cause overflow ni bloquee toques */
   align-items: center;
   justify-content: center;
   padding: clamp(0.75rem, 3vw, 1.5rem);
   opacity: 0;
   visibility: hidden;
-  transition: all var(--transition-base);
+  transition: opacity var(--transition-base);
 }
 
 .content-modal-backdrop.open {
+  display: flex;
   opacity: 1;
   visibility: visible;
 }
@@ -572,15 +573,18 @@
   border-left: 4px solid var(--clr-gold);
   box-shadow: var(--shadow-lg);
   z-index: 3000;
-  transform: translateY(120%);
-  opacity: 0;
-  transition: all var(--transition-base);
+  display: none;
   font-size: 0.92rem;
 }
 
 .toast-notification.show {
-  transform: translateY(0);
-  opacity: 1;
+  display: block;
+  animation: toastFadeIn 0.3s ease forwards;
+}
+
+@keyframes toastFadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* ==========================================================================

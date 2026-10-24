@@ -386,14 +386,14 @@
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   z-index: 1040;
+  display: none;
   opacity: 0;
-  visibility: hidden;
-  transition: all var(--transition-base);
+  transition: opacity var(--transition-base);
 }
 
 .mobile-nav-backdrop.show {
+  display: block;
   opacity: 1;
-  visibility: visible;
 }
 
 /* ==========================================================================
@@ -406,16 +406,17 @@
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   z-index: 2000;
-  display: flex;
+  display: none;
   align-items: flex-start;
   justify-content: center;
   padding: clamp(3.5rem, 8vh, 6rem) 1rem 1.5rem;
   opacity: 0;
   visibility: hidden;
-  transition: all var(--transition-base);
+  transition: opacity var(--transition-base);
 }
 
 .search-overlay.open {
+  display: flex;
   opacity: 1;
   visibility: visible;
 }
@@ -639,25 +640,37 @@
     top: 0;
     right: 0;
     bottom: 0;
-    width: min(340px, 86vw);
+    width: min(320px, 85vw);
+    max-width: 100%;
     background: var(--clr-surface);
     flex-direction: column;
     align-items: stretch;
-    padding: 1.75rem 1.25rem 2.5rem;
+    padding: 1.5rem 1.25rem 2.5rem;
     box-shadow: -8px 0 32px rgba(15, 23, 42, 0.28);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateX(100%);
-    transition: transform var(--transition-base), opacity var(--transition-base), visibility var(--transition-base);
     z-index: 1050;
+    display: none; /* Crucial: no genera overflow horizontal cuando está cerrado */
+    transform: translateX(100%);
+    opacity: 0;
   }
 
   .main-nav.mobile-open {
-    opacity: 1;
-    visibility: visible;
+    display: flex;
     transform: translateX(0);
+    opacity: 1;
+    animation: drawerSlideIn 0.28s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+
+  @keyframes drawerSlideIn {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
   }
 
   /* Encabezado dentro del menú móvil */
