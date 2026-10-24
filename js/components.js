@@ -1,6 +1,6 @@
 /**
  * Componentes Modulares Compartidos - Agustinos Bolivia
- * Renderiza Topbar, Header con Mega-Menú, Modal de Búsqueda, Backdrop Móvil y Footer
+ * Renderiza Topbar, Header Desktop, Cajón de Navegación Móvil (Drawer) y Footer
  */
 
 function renderInstitutionalHeader(activePage = 'inicio', basePath = '') {
@@ -54,15 +54,8 @@ function renderInstitutionalHeader(activePage = 'inicio', basePath = '') {
           </div>
         </a>
 
-        <!-- Menú de Navegación (Desktop y Drawer Móvil) -->
-        <nav class="main-nav" id="mainNav" aria-label="Navegación principal">
-          <div class="mobile-nav-header hide-desktop">
-            <div style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700; color: var(--clr-navy);">
-              MENÚ AGUSTINOS
-            </div>
-            <button class="mobile-nav-close" id="mobileNavClose" aria-label="Cerrar menú">✕</button>
-          </div>
-
+        <!-- Menú de Navegación Desktop (> 1080px) -->
+        <nav class="main-nav desktop-nav" id="mainNav" aria-label="Navegación principal">
           <div class="nav-item">
             <a href="${basePath}index.html" class="nav-link ${activePage === 'inicio' ? 'active' : ''}">Inicio</a>
           </div>
@@ -131,7 +124,7 @@ function renderInstitutionalHeader(activePage = 'inicio', basePath = '') {
           </div>
         </nav>
 
-        <!-- Acciones: Buscador, CTA y Menú Hamburguesa -->
+        <!-- Acciones: Buscador, CTA y Botón Menú Móvil con buen margen -->
         <div class="header-actions">
           <button class="search-trigger" id="globalSearchTrigger" aria-label="Abrir buscador global" title="Buscar">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/></svg>
@@ -140,15 +133,109 @@ function renderInstitutionalHeader(activePage = 'inicio', basePath = '') {
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
             <span>Ser Agustino</span>
           </a>
-          <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Abrir menú de navegación">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
+          <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Abrir menú de opciones" title="Menú">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
           </button>
         </div>
       </div>
     </header>
 
-    <!-- Fondo Oscuro Backdrop para menú móvil -->
+    <!-- Backdrop Oscuro para móvil (z-index 2040) -->
     <div class="mobile-nav-backdrop" id="mobileNavBackdrop"></div>
+
+    <!-- Cajón de Navegación Móvil (z-index 2050 - Fuera del header para que NUNCA se opaque ni quede atrapado) -->
+    <aside class="mobile-nav-drawer" id="mobileNavDrawer" aria-label="Menú de navegación móvil">
+      <div class="drawer-header">
+        <div class="drawer-brand">
+          <div class="brand-crest" style="width: 38px; height: 38px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+              <path d="M12 7c-2-2.5-4-1-4 1.5 0 2 4 4.5 4 4.5s4-2.5 4-4.5c0-2.5-2-4-4-1.5z" fill="#C59B27"/>
+            </svg>
+          </div>
+          <div>
+            <div style="font-family: var(--font-serif); font-size: 1.15rem; font-weight: 700; color: var(--clr-navy); line-height: 1;">AGUSTINOS</div>
+            <div style="font-size: 0.65rem; font-weight: 700; color: var(--clr-primary); letter-spacing: 0.1em; text-transform: uppercase;">Vicariato de Bolivia</div>
+          </div>
+        </div>
+        <button class="drawer-close-btn" id="mobileDrawerClose" aria-label="Cerrar menú">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <div class="drawer-body">
+        <div class="drawer-links">
+          <div class="drawer-item">
+            <a href="${basePath}index.html" class="drawer-link ${activePage === 'inicio' ? 'active' : ''}">
+              <span>Inicio</span>
+            </a>
+          </div>
+
+          <div class="drawer-item has-sub">
+            <button class="drawer-link drawer-toggle-btn ${activePage === 'quienes-somos' ? 'active' : ''}">
+              <span>Quiénes somos</span>
+              <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="drawer-sub">
+              <a href="${basePath}pages/quienes-somos.html#historia" class="drawer-sub-link">Nuestra Historia en Bolivia</a>
+              <a href="${basePath}pages/quienes-somos.html#carisma" class="drawer-sub-link">Pilares del Carisma</a>
+              <a href="${basePath}pages/quienes-somos.html#san-agustin" class="drawer-sub-link">San Agustín de Hipona</a>
+              <a href="${basePath}pages/quienes-somos.html#santos" class="drawer-sub-link">Santos y Beatos Agustinos</a>
+              <a href="${basePath}pages/quienes-somos.html#fray-calancha" class="drawer-sub-link">Fray Antonio de la Calancha</a>
+            </div>
+          </div>
+
+          <div class="drawer-item has-sub">
+            <button class="drawer-link drawer-toggle-btn ${activePage === 'que-hacemos' ? 'active' : ''}">
+              <span>Qué hacemos</span>
+              <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="drawer-sub">
+              <a href="${basePath}pages/que-hacemos.html#educacion" class="drawer-sub-link">Colegio San Agustín (Cochabamba)</a>
+              <a href="${basePath}pages/que-hacemos.html#teologado" class="drawer-sub-link">Teologado Latinoamericano</a>
+              <a href="${basePath}pages/que-hacemos.html#pastoral" class="drawer-sub-link">Parroquias y Templos</a>
+              <a href="${basePath}pages/que-hacemos.html#misiones" class="drawer-sub-link">Misiones en Sud Yungas</a>
+            </div>
+          </div>
+
+          <div class="drawer-item has-sub">
+            <button class="drawer-link drawer-toggle-btn ${activePage === 'ser-agustino' ? 'active' : ''}">
+              <span>Ser Agustino</span>
+              <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="drawer-sub">
+              <a href="${basePath}pages/ser-agustino.html#vocaciones" class="drawer-sub-link">Pastoral Vocacional</a>
+              <a href="${basePath}pages/ser-agustino.html#etapas" class="drawer-sub-link">Itinerario de Formación</a>
+              <a href="${basePath}pages/ser-agustino.html#discernimiento" class="drawer-sub-link">Contacto de Discernimiento</a>
+            </div>
+          </div>
+
+          <div class="drawer-item">
+            <a href="${basePath}pages/noticias.html" class="drawer-link ${activePage === 'noticias' ? 'active' : ''}">
+              <span>Noticias y Actualidad</span>
+            </a>
+          </div>
+
+          <div class="drawer-item">
+            <a href="${basePath}pages/contacto.html" class="drawer-link ${activePage === 'contacto' ? 'active' : ''}">
+              <span>Comunidades y Contacto</span>
+            </a>
+          </div>
+        </div>
+
+        <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--clr-border);">
+          <a href="${basePath}pages/ser-agustino.html#discernimiento" class="btn btn-primary" style="width: 100%; font-size: 0.92rem; padding: 0.85rem 1.2rem;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            ¿Sientes la vocación? Escríbenos
+          </a>
+          <div style="margin-top: 1.25rem; font-size: 0.84rem; color: var(--clr-text-muted); display: flex; flex-direction: column; gap: 0.45rem;">
+            <div><strong>Teléfono:</strong> <a href="tel:+59122311580" style="color: var(--clr-primary); font-weight: 600;">+591 (2) 231-1580</a></div>
+            <div><strong>Email:</strong> <a href="mailto:vicariato@agustinosbolivia.org" style="color: var(--clr-primary); font-weight: 600;">vicariato@agustinosbolivia.org</a></div>
+          </div>
+        </div>
+      </div>
+    </aside>
   `;
 
   return topbarHTML + headerHTML;
