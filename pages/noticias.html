@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Noticias y Actualidad — Agustinos Bolivia | Orden de San Agustín</title>
+  <meta name="description" content="Portal de noticias, comunicados institucionales y crónicas pastorales del Vicariato de Bolivia de la Orden de San Agustín.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Hojas de Estilo -->
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/pages.css">
+</head>
+<body>
+
+  <!-- Contenedor del Encabezado Institucional Dinámico -->
+  <div id="headerPlaceholder"></div>
+
+  <main>
+    <!-- Page Hero -->
+    <section class="page-hero">
+      <div class="page-hero-bg" style="background-image: url('https://images.unsplash.com/photo-1544427920-c49ccfb85579?auto=format&fit=crop&w=1920&q=80');"></div>
+      <div class="page-hero-overlay"></div>
+      <div class="container page-hero-content">
+        <div class="breadcrumb">
+          <a href="../index.html" style="color: rgba(255,255,255,0.7);">Inicio</a> / <span>Noticias</span>
+        </div>
+        <h1 class="page-hero-title">Noticias y Actualidad</h1>
+        <p class="page-hero-lead">
+          Crónicas de nuestras comunidades, celebraciones litúrgicas, vida escolar en Cochabamba y misiones pastorales en todo el territorio boliviano.
+        </p>
+      </div>
+    </section>
+
+    <!-- Filtros y Buscador de Noticias -->
+    <section class="section-padding bg-alt">
+      <div class="container">
+        <div style="background: var(--clr-surface); padding: 1.5rem 2rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); margin-bottom: 3rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap;" class="reveal">
+          <div class="filter-tabs" id="pageNewsFilterTabs" style="margin-bottom: 0;">
+            <button class="filter-tab active" data-filter="all">Todas</button>
+            <button class="filter-tab" data-filter="vicariato">Vicariato</button>
+            <button class="filter-tab" data-filter="educacion">Educación</button>
+            <button class="filter-tab" data-filter="vocaciones">Vocaciones</button>
+            <button class="filter-tab" data-filter="pastoral">Pastoral</button>
+          </div>
+
+          <div style="position: relative; min-width: 280px; flex: 1; max-width: 380px;">
+            <input type="text" id="newsLiveSearch" placeholder="Buscar por palabra clave..." class="form-control" style="padding-left: 2.6rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="position: absolute; left: 0.9rem; top: 50%; transform: translateY(-50%); color: var(--clr-text-light);">
+              <circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Grid de Noticias -->
+        <div class="news-grid" id="allNewsGrid">
+          <!-- Inyectado dinámicamente -->
+        </div>
+
+        <!-- Mensaje de no resultados -->
+        <div id="noNewsFound" style="display: none; padding: 4rem 1.5rem; text-align: center; color: var(--clr-text-muted);">
+          <h3 style="font-size: 1.6rem; color: var(--clr-navy); margin-bottom: 0.5rem;">No se encontraron noticias</h3>
+          <p>Intenta con otros términos o selecciona una categoría diferente.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Contenedor del Pie de Página y Modales Dinámicos -->
+  <div id="footerPlaceholder"></div>
+  <div id="modalsPlaceholder"></div>
+
+  <!-- Scripts Modulares -->
+  <script src="../js/data.js"></script>
+  <script src="../js/components.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    document.getElementById('headerPlaceholder').innerHTML = renderInstitutionalHeader('noticias', '../');
+    document.getElementById('footerPlaceholder').innerHTML = renderInstitutionalFooter('../');
+    document.getElementById('modalsPlaceholder').innerHTML = renderModalsAndOverlays();
+
+    let activeFilter = 'all';
+    let searchQuery = '';
+
+    function renderArticles() {
+      const container = document.getElementById('allNewsGrid');
+      const noFound = document.getElementById('noNewsFound');
+      if (!container || typeof AGUSTINOS_DATA === 'undefined') return;
+
+      const items = AGUSTINOS_DATA.news.filter(n => {
+        const matchesCategory = (activeFilter === 'all') || (n.category === activeFilter);
+        const matchesQuery = (!searchQuery) || 
+          (n.title.toLowerCase().includes(searchQuery)) || 
+          (n.excerpt.toLowerCase().includes(searchQuery));
+        return matchesCategory && matchesQuery;
+      });
+
+      if (items.length === 0) {
+        container.innerHTML = '';
+        noFound.style.display = 'block';
+      } else {
+        noFound.style.display = 'none';
+        container.innerHTML = items.map(item => `
+          <article class="news-card reveal" onclick="openNewsModal(${item.id})" style="cursor: pointer;">
+            <div class="news-thumb">
+              <img src="${item.thumb}" alt="${escapeHtml(item.title)}" loading="lazy">
+              <span class="news-badge">${escapeHtml(item.categoryLabel)}</span>
+            </div>
+            <div class="news-body">
+              <div class="news-meta">
+                <span>📅 ${escapeHtml(item.date)}</span>
+                <span>⏱ ${escapeHtml(item.readTime)}</span>
+              </div>
+              <h3 class="news-title">${escapeHtml(item.title)}</h3>
+              <p class="news-excerpt">${escapeHtml(item.excerpt)}</p>
+              <span class="news-read-more">
+                Leer noticia completa
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+              </span>
+            </div>
+          </article>
+        `).join('');
+      }
+
+      initScrollReveal();
+    }
+
+    renderArticles();
+
+    // Filtros de categoría
+    document.querySelectorAll('#pageNewsFilterTabs .filter-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#pageNewsFilterTabs .filter-tab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeFilter = btn.dataset.filter;
+        renderArticles();
+      });
+    });
+
+    // Búsqueda en vivo
+    const searchInput = document.getElementById('newsLiveSearch');
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value.trim().toLowerCase();
+        renderArticles();
+      });
+    }
+  </script>
+</body>
+</html>

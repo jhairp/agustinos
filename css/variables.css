@@ -1,0 +1,217 @@
+:root {
+  /* Paleta Institucional Agustiniana (inspirada en agustinos.es con identidad para Bolivia) */
+  --clr-primary: #9e1b32;          /* Rojo carmesí agustiniano (Corazón ardiente) */
+  --clr-primary-dark: #7a1224;     /* Granate profundo */
+  --clr-primary-light: #c82846;    /* Carmesí vibrante */
+  --clr-primary-soft: rgba(158, 27, 50, 0.08);
+
+  --clr-gold: #c59b27;             /* Dorado litúrgico e institucional */
+  --clr-gold-light: #e0b844;
+  --clr-gold-soft: rgba(197, 155, 39, 0.14);
+
+  --clr-navy: #18243c;             /* Azul profundo institucional (Interioridad y estudio) */
+  --clr-navy-light: #253659;
+  --clr-navy-dark: #0f172a;
+
+  --clr-bg: #fcfaf7;               /* Fondo cálido crema suave */
+  --clr-bg-alt: #f4efe6;           /* Fondo secundario piedra/pergamino */
+  --clr-surface: #ffffff;          /* Superficie de tarjetas */
+
+  --clr-text: #2c2a29;             /* Texto principal oscuro cálido */
+  --clr-text-muted: #64605d;       /* Texto secundario */
+  --clr-text-light: #948f8a;       /* Texto auxiliar */
+  --clr-white: #ffffff;
+
+  --clr-border: #e6dfd5;
+  --clr-border-light: #f0ebe1;
+
+  --clr-success: #1f7a4c;
+  --clr-info: #1d5b8c;
+
+  /* Tipografía */
+  --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Espaciados y Contenedores */
+  --container-max: 1280px;
+  --container-narrow: 960px;
+  --header-height: 86px;
+  --topbar-height: 40px;
+
+  /* Bordes y Sombras */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+
+  --shadow-xs: 0 2px 6px rgba(24, 36, 60, 0.04);
+  --shadow-sm: 0 4px 16px rgba(24, 36, 60, 0.07);
+  --shadow-md: 0 12px 32px rgba(24, 36, 60, 0.10);
+  --shadow-lg: 0 20px 48px rgba(24, 36, 60, 0.16);
+  --shadow-primary: 0 10px 26px rgba(158, 27, 50, 0.25);
+
+  /* Transiciones */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Reset y Base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--clr-text);
+  background-color: var(--clr-bg);
+  line-height: 1.65;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, .serif-heading {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  line-height: 1.18;
+  color: var(--clr-navy);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+ul {
+  list-style: none;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.container-narrow {
+  width: 100%;
+  max-width: var(--container-narrow);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section-padding {
+  padding: 5.5rem 0;
+}
+
+.section-padding-sm {
+  padding: 3.5rem 0;
+}
+
+.bg-alt {
+  background-color: var(--clr-bg-alt);
+}
+
+.bg-navy {
+  background-color: var(--clr-navy);
+  color: var(--clr-white);
+}
+
+.bg-primary {
+  background-color: var(--clr-primary);
+  color: var(--clr-white);
+}
+
+/* Encabezados de Sección al estilo agustinos.es */
+.section-header {
+  margin-bottom: 3.25rem;
+}
+
+.section-header.center {
+  text-align: center;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--clr-primary);
+  margin-bottom: 0.75rem;
+}
+
+.section-eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 2px;
+  background-color: var(--clr-gold);
+}
+
+.section-header.center .section-eyebrow::after {
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 2px;
+  background-color: var(--clr-gold);
+}
+
+.section-title {
+  font-size: clamp(2.1rem, 3.8vw, 3.1rem);
+  color: var(--clr-navy);
+  margin-bottom: 1rem;
+  letter-spacing: -0.01em;
+}
+
+.section-subtitle {
+  font-size: 1.08rem;
+  color: var(--clr-text-muted);
+  line-height: 1.7;
+}
+
+/* Animaciones Reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

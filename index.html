@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agustinos Bolivia — Orden de San Agustín | Vicariato de Bolivia</title>
+  <meta name="description" content="Sitio oficial del Vicariato de Bolivia de la Orden de San Agustín (O.S.A.). Educación, vida comunitaria, pastoral y vocaciones con el carisma de San Agustín.">
+  
+  <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Hojas de Estilo Modulares -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+  <!-- Contenedor del Encabezado Institucional Dinámico -->
+  <div id="headerPlaceholder"></div>
+
+  <main>
+    <!-- ==========================================================================
+         HERO SLIDER INTERACTIVO (Inspirado en agustinos.es)
+         ========================================================================== -->
+    <section class="hero-slider" aria-label="Destacados principales">
+      <!-- Slide 1 -->
+      <div class="hero-slide active">
+        <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1544427920-c49ccfb85579?auto=format&fit=crop&w=1920&q=80');"></div>
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+          <span class="hero-tag">Orden de San Agustín • Vicariato de Bolivia</span>
+          <h1 class="hero-title">Una sola alma y un solo corazón hacia Dios</h1>
+          <p class="hero-desc">Más de 90 años consagrados a la búsqueda sincera de la Verdad, la educación de excelencia y la entrega comunitaria en el corazón de Bolivia.</p>
+          <div class="hero-actions">
+            <a href="pages/quienes-somos.html" class="btn btn-primary">
+              Quiénes somos
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <a href="pages/ser-agustino.html" class="btn btn-outline-light">Vocaciones Agustinianas</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="hero-slide">
+        <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1920&q=80');"></div>
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+          <span class="hero-tag">Educación Agustiniana de Excelencia</span>
+          <h2 class="hero-title">Colegio San Agustín de Cochabamba</h2>
+          <p class="hero-desc">Formando líderes éticos, intelectuales y solidarios desde 1954 bajo los pilares del humanismo cristiano y el rigor académico.</p>
+          <div class="hero-actions">
+            <a href="pages/que-hacemos.html#colegio-cbba" class="btn btn-primary">Conocer nuestra Educación</a>
+            <a href="pages/contacto.html" class="btn btn-outline-light">Contactar Sede</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="hero-slide">
+        <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1920&q=80');"></div>
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+          <span class="hero-tag">Misión y Fraternidad</span>
+          <h2 class="hero-title">Presencia Misionera en los Yungas</h2>
+          <p class="hero-desc">Desde las históricas tierras de Chirca y Sud Yungas, acompañamos a las familias campesinas con pastoral social, educación y solidaridad viva.</p>
+          <div class="hero-actions">
+            <a href="pages/que-hacemos.html#misiones" class="btn btn-primary">Obras y Misiones</a>
+            <a href="pages/contacto.html#colabora" class="btn btn-gold">Colaborar</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controles del Slider -->
+      <div class="hero-controls">
+        <div class="container hero-controls-inner">
+          <div class="hero-dots" id="heroDots"></div>
+          <div class="hero-arrows">
+            <button class="hero-arrow" id="heroPrev" aria-label="Slide anterior">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="hero-arrow" id="heroNext" aria-label="Slide siguiente">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PILARES INSTITUCIONALES EN PORTADA (Estilo agustinos.es)
+         ========================================================================== -->
+    <section class="quick-pillars">
+      <div class="container">
+        <div class="pillars-grid">
+          <div class="pillar-card reveal">
+            <div>
+              <div class="pillar-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              </div>
+              <h3 class="pillar-title">Interioridad</h3>
+              <p class="pillar-text">El camino al interior del corazón para el encuentro vivo con la Verdad y con uno mismo.</p>
+            </div>
+            <a href="pages/quienes-somos.html#carisma" class="pillar-link">
+              Descubrir más
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+
+          <div class="pillar-card reveal">
+            <div>
+              <div class="pillar-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <h3 class="pillar-title">Comunidad</h3>
+              <p class="pillar-text">Vivir como hermanos unánimes, compartiendo bienes materiales y dones espirituales.</p>
+            </div>
+            <a href="pages/quienes-somos.html#carisma" class="pillar-link">
+              Vida Fraterna
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+
+          <div class="pillar-card reveal">
+            <div>
+              <div class="pillar-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              </div>
+              <h3 class="pillar-title">Educación y Cultura</h3>
+              <p class="pillar-text">Colegios, Teologado y formación de laicos con profundo rigor ético y científico.</p>
+            </div>
+            <a href="pages/que-hacemos.html#educacion" class="pillar-link">
+              Nuestras Aulas
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+
+          <div class="pillar-card reveal">
+            <div>
+              <div class="pillar-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              </div>
+              <h3 class="pillar-title">Ser Agustino</h3>
+              <p class="pillar-text">Discernimiento y vocación consagrada para responder a las inquietudes del corazón.</p>
+            </div>
+            <a href="pages/ser-agustino.html" class="pillar-link">
+              Itinerario Vocacional
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         QUIÉNES SOMOS & PRESENCIA EN BOLIVIA
+         ========================================================================== -->
+    <section class="section-padding">
+      <div class="container two-col-layout" style="align-items: center;">
+        <div class="reveal">
+          <span class="section-eyebrow">Vicariato de Bolivia • O.S.A.</span>
+          <h2 class="section-title">Seguidores de Cristo tras las huellas de San Agustín</h2>
+          <p style="font-size: 1.05rem; color: var(--clr-text-muted); margin-bottom: 1.25rem; line-height: 1.8;">
+            La Orden de San Agustín en Bolivia es una comunidad de creyentes y religiosos unidos por el amor fraternal y la búsqueda compartida de Dios. Desde nuestra llegada histórica en los siglos virreinales y nuestra presencia moderna de más de 90 años en los valles y alturas de Bolivia, servimos a la sociedad a través de la educación, la atención parroquial y las misiones rurales.
+          </p>
+          <p style="font-size: 1.05rem; color: var(--clr-text-muted); margin-bottom: 2rem; line-height: 1.8;">
+            Inspirados en la Regla de San Agustín, nuestro llamado es ser «un solo corazón y una sola alma orientados hacia Dios», promoviendo la paz, el discernimiento y el servicio a los más necesitados.
+          </p>
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a href="pages/quienes-somos.html" class="btn btn-primary">Conocer nuestra Historia</a>
+            <a href="pages/contacto.html#comunidades" class="btn btn-outline-primary">Ver Comunidades</a>
+          </div>
+        </div>
+
+        <div class="reveal" style="position: relative;">
+          <div style="border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg);">
+            <img src="https://images.unsplash.com/photo-1548625361-16a798993264?auto=format&fit=crop&w=1000&q=80" alt="Comunidad Agustina en Bolivia" style="width: 100%; height: 480px; object-fit: cover;">
+          </div>
+          <div style="position: absolute; bottom: -1.5rem; left: -1.5rem; background: var(--clr-surface); padding: 1.5rem 1.75rem; border-radius: var(--radius-md); box-shadow: var(--shadow-md); border-left: 5px solid var(--clr-gold); max-width: 280px;">
+            <div style="font-size: 2.2rem; font-family: var(--font-serif); font-weight: 700; color: var(--clr-primary); line-height: 1;">+90 Años</div>
+            <div style="font-size: 0.85rem; font-weight: 600; color: var(--clr-navy); margin-top: 0.35rem;">De testimonio agustiniano ininterrumpido en Bolivia</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         BANNER DE CIFRAS Y ALCANCE INSTITUCIONAL
+         ========================================================================== -->
+    <section class="stats-banner">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="reveal">
+            <div class="stat-number">6+</div>
+            <div class="stat-label">Comunidades y Casas en Bolivia</div>
+          </div>
+          <div class="reveal">
+            <div class="stat-number">1954</div>
+            <div class="stat-label">Fundación Colegio San Agustín Cochabamba</div>
+          </div>
+          <div class="reveal">
+            <div class="stat-number">1500+</div>
+            <div class="stat-label">Estudiantes formados anualmente</div>
+          </div>
+          <div class="reveal">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Compromiso con el Carisma Agustiniano</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         NOTICIAS Y ACTUALIDAD PROVINCIAL (Filtros y Tarjetas)
+         ========================================================================== -->
+    <section class="section-padding bg-alt">
+      <div class="container">
+        <div class="section-header center reveal">
+          <span class="section-eyebrow">Actualidad y Vida Provincial</span>
+          <h2 class="section-title">Últimas Noticias de Agustinos Bolivia</h2>
+          <p class="section-subtitle">Mantente al tanto de los acontecimientos, actividades de nuestras comunidades, proyectos educativos y jornadas pastorales en el país.</p>
+        </div>
+
+        <div class="filter-tabs reveal" id="newsFilterTabs" style="justify-content: center;">
+          <button class="filter-tab active" data-filter="all">Todas</button>
+          <button class="filter-tab" data-filter="vicariato">Vicariato</button>
+          <button class="filter-tab" data-filter="educacion">Educación</button>
+          <button class="filter-tab" data-filter="vocaciones">Vocaciones</button>
+          <button class="filter-tab" data-filter="pastoral">Pastoral</button>
+        </div>
+
+        <div class="news-grid" id="homeNewsGrid">
+          <!-- Inyectado dinámicamente desde AGUSTINOS_DATA.news -->
+        </div>
+
+        <div style="text-align: center; margin-top: 3.5rem;" class="reveal">
+          <a href="pages/noticias.html" class="btn btn-outline-primary">
+            Ver todas las publicaciones
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         CITA VIVA DE SAN AGUSTÍN
+         ========================================================================== -->
+    <section class="section-padding-sm">
+      <div class="container">
+        <div class="quote-showcase reveal">
+          <div style="font-size: 3.5rem; opacity: 0.3; font-family: var(--font-serif); line-height: 0.6; margin-bottom: 0.5rem;">“</div>
+          <p class="quote-text" id="featuredQuote">
+            "Nos hiciste, Señor, para ti, y nuestro corazón está inquieto hasta que descanse en ti."
+          </p>
+          <div class="quote-source" id="featuredQuoteSource">San Agustín — Confesiones, I, 1</div>
+          <button class="btn btn-outline-light" id="changeQuoteBtn" style="padding: 0.55rem 1.4rem; font-size: 0.82rem;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+            Otra reflexión de San Agustín
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         LLAMADO VOCACIONAL & COMUNIÓN
+         ========================================================================== -->
+    <section class="section-padding">
+      <div class="container">
+        <div style="background: linear-gradient(135deg, var(--clr-navy) 0%, var(--clr-navy-light) 100%); border-radius: var(--radius-xl); padding: 4.5rem 3rem; color: var(--clr-white); position: relative; overflow: hidden;" class="reveal">
+          <div style="position: absolute; right: -5%; bottom: -10%; opacity: 0.08; width: 420px; height: 420px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.5">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+            </svg>
+          </div>
+          <div style="max-width: 680px; position: relative; z-index: 2;">
+            <span class="hero-tag" style="background: rgba(197, 155, 39, 0.25);">Pastoral Vocacional</span>
+            <h2 style="font-size: clamp(2.2rem, 4vw, 3.2rem); color: var(--clr-white); margin-bottom: 1.25rem;">
+              ¿Sientes la inquietud de entregar tu vida como consagrado?
+            </h2>
+            <p style="font-size: 1.1rem; color: rgba(255, 255, 255, 0.88); line-height: 1.8; margin-bottom: 2.25rem;">
+              San Agustín descubrió que la plenitud solo se alcanza cuando respondemos a la voz de Dios en el silencio interior y en comunión con los hermanos. Conoce nuestro itinerario vocacional en Bolivia.
+            </p>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+              <a href="pages/ser-agustino.html" class="btn btn-gold">Itinerario Vocacional</a>
+              <a href="pages/ser-agustino.html#discernimiento" class="btn btn-outline-light">Escribir a Vocaciones</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Contenedor del Pie de Página y Modales Dinámicos -->
+  <div id="footerPlaceholder"></div>
+  <div id="modalsPlaceholder"></div>
+
+  <!-- Scripts Modulares -->
+  <script src="js/data.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // Inyectar componentes institucionales
+    document.getElementById('headerPlaceholder').innerHTML = renderInstitutionalHeader('inicio', '');
+    document.getElementById('footerPlaceholder').innerHTML = renderInstitutionalFooter('');
+    document.getElementById('modalsPlaceholder').innerHTML = renderModalsAndOverlays();
+
+    // Renderizar Noticias en la Portada (Primeras 3 o según filtro)
+    function renderHomeNews(filter = 'all') {
+      const container = document.getElementById('homeNewsGrid');
+      if (!container || typeof AGUSTINOS_DATA === 'undefined') return;
+
+      const filtered = filter === 'all' 
+        ? AGUSTINOS_DATA.news.slice(0, 3) 
+        : AGUSTINOS_DATA.news.filter(n => n.category === filter);
+
+      container.innerHTML = filtered.map(item => `
+        <article class="news-card reveal" onclick="openNewsModal(${item.id})" style="cursor: pointer;">
+          <div class="news-thumb">
+            <img src="${item.thumb}" alt="${escapeHtml(item.title)}" loading="lazy">
+            <span class="news-badge">${escapeHtml(item.categoryLabel)}</span>
+          </div>
+          <div class="news-body">
+            <div class="news-meta">
+              <span>📅 ${escapeHtml(item.date)}</span>
+              <span>⏱ ${escapeHtml(item.readTime)}</span>
+            </div>
+            <h3 class="news-title">${escapeHtml(item.title)}</h3>
+            <p class="news-excerpt">${escapeHtml(item.excerpt)}</p>
+            <span class="news-read-more">
+              Leer noticia completa
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </span>
+          </div>
+        </article>
+      `).join('');
+
+      initScrollReveal();
+    }
+
+    renderHomeNews('all');
+
+    // Filtros de noticias en portada
+    document.querySelectorAll('#newsFilterTabs .filter-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#newsFilterTabs .filter-tab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderHomeNews(btn.dataset.filter);
+      });
+    });
+
+    // Citas rotativas de San Agustín
+    let quoteIndex = 0;
+    const quoteBtn = document.getElementById('changeQuoteBtn');
+    if (quoteBtn && typeof AGUSTINOS_DATA !== 'undefined') {
+      quoteBtn.addEventListener('click', () => {
+        quoteIndex = (quoteIndex + 1) % AGUSTINOS_DATA.quotes.length;
+        const q = AGUSTINOS_DATA.quotes[quoteIndex];
+        const textEl = document.getElementById('featuredQuote');
+        const srcEl = document.getElementById('featuredQuoteSource');
+        if (textEl && srcEl) {
+          textEl.textContent = `"${q.text}"`;
+          srcEl.textContent = q.source;
+        }
+      });
+    }
+  </script>
+</body>
+</html>
