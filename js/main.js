@@ -1,5 +1,6 @@
 /**
  * Lógica Principal e Interacciones - Agustinos Bolivia
+ * Optimizado para experiencia fluida en móviles, tablets y computadoras
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -13,47 +14,113 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ==========================================================================
-   HEADER & NAVEGACIÓN MÓVIL
+   HEADER & NAVEGACIÓN MÓVIL RESPONSIVA (DRAWER CON BACKDROP)
    ========================================================================== */
 function initHeader() {
   const header = document.getElementById('siteHeader');
   const mobileToggle = document.getElementById('mobileMenuToggle');
+  const mobileClose = document.getElementById('mobileNavClose');
+  const mobileBackdrop = document.getElementById('mobileNavBackdrop');
   const mainNav = document.getElementById('mainNav');
 
   if (header) {
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 40) {
+      if (window.scrollY > 30) {
         header.classList.add('scrolled');
       } else {
         header.classList.remove('scrolled');
       }
+    }, { passive: true });
+  }
+
+  function openMobileNav() {
+    if (mainNav) mainNav.classList.add('mobile-open');
+    if (mobileBackdrop) mobileBackdrop.classList.add('show');
+    document.body.classList.add('menu-open');
+  }
+
+  function closeMobileNav() {
+    if (mainNav) mainNav.classList.remove('mobile-open');
+    if (mobileBackdrop) mobileBackdrop.classList.remove('show');
+    document.body.classList.remove('menu-open');
+  }
+
+  if (mobileToggle) {
+    mobileToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openMobileNav();
     });
   }
 
-  if (mobileToggle && mainNav) {
-    mobileToggle.addEventListener('click', () => {
-      mainNav.classList.toggle('mobile-open');
+  if (mobileClose) {
+    mobileClose.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeMobileNav();
     });
+  }
 
-    // En móviles, permitir desplegar submenús con click
+  if (mobileBackdrop) {
+    mobileBackdrop.addEventListener('click', closeMobileNav);
+  }
+
+  // Cerrar con Escape o al redimensionar a pantalla grande
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1080 && mainNav && mainNav.classList.contains('mobile-open')) {
+      closeMobileNav();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mainNav && mainNav.classList.contains('mobile-open')) {
+      closeMobileNav();
+    }
+  });
+
+  // Manejo de clicks en menú móvil
+  if (mainNav) {
     const navItems = mainNav.querySelectorAll('.nav-item');
     navItems.forEach(item => {
       const link = item.querySelector('.nav-link');
       const dropdown = item.querySelector('.dropdown-menu');
-      if (dropdown && link) {
+
+      if (link && dropdown) {
         link.addEventListener('click', (e) => {
           if (window.innerWidth <= 1080) {
             e.preventDefault();
-            item.classList.toggle('open');
+            const isOpen = item.classList.contains('open');
+
+            // Cerrar otros submenús para que quede ordenado
+            navItems.forEach(other => {
+              if (other !== item) other.classList.remove('open');
+            });
+
+            item.classList.toggle('open', !isOpen);
+          }
+        });
+      } else if (link && !dropdown) {
+        // Enlaces directos cierran el menú móvil
+        link.addEventListener('click', () => {
+          if (window.innerWidth <= 1080) {
+            closeMobileNav();
           }
         });
       }
+
+      // Enlaces dentro de dropdown cierran el menú al seleccionarlos
+      const subLinks = item.querySelectorAll('.dropdown-link');
+      subLinks.forEach(sl => {
+        sl.addEventListener('click', () => {
+          if (window.innerWidth <= 1080) {
+            closeMobileNav();
+          }
+        });
+      });
     });
   }
 }
 
 /* ==========================================================================
-   BUSCADOR GLOBAL
+   BUSCADOR GLOBAL INSTANTÁNEO
    ========================================================================== */
 function initGlobalSearch() {
   const trigger = document.getElementById('globalSearchTrigger');
@@ -66,11 +133,13 @@ function initGlobalSearch() {
 
   function openSearch() {
     overlay.classList.add('open');
+    document.body.classList.add('menu-open');
     setTimeout(() => searchInput.focus(), 150);
   }
 
   function closeSearch() {
     overlay.classList.remove('open');
+    document.body.classList.remove('menu-open');
     searchInput.value = '';
     renderSearchInitial();
   }
@@ -156,7 +225,7 @@ function initGlobalSearch() {
     resultsContainer.innerHTML = matches.map((m, idx) => `
       <div class="search-result-item" data-index="${idx}" style="cursor: pointer;">
         <div>
-          <h4 style="font-size: 1.05rem; margin-bottom: 0.2rem; color: var(--clr-navy);">${escapeHtml(m.title)}</h4>
+          <h4 style="font-size: 1.02rem; margin-bottom: 0.2rem; color: var(--clr-navy);">${escapeHtml(m.title)}</h4>
           <p style="font-size: 0.84rem; color: var(--clr-text-muted);">${escapeHtml(m.subtitle)}</p>
         </div>
         <span class="search-result-tag">${escapeHtml(m.type)}</span>
@@ -174,9 +243,10 @@ function initGlobalSearch() {
 }
 
 /* ==========================================================================
-   HERO SLIDER
+   HERO SLIDER TOUCH & AUTO
    ========================================================================== */
 function initHeroSlider() {
+  const slider = document.querySelector('.hero-slider');
   const slides = document.querySelectorAll('.hero-slide');
   const dotsContainer = document.getElementById('heroDots');
   const prevBtn = document.getElementById('heroPrev');
@@ -192,7 +262,7 @@ function initHeroSlider() {
     slides.forEach((_, idx) => {
       const dot = document.createElement('button');
       dot.className = `hero-dot ${idx === 0 ? 'active' : ''}`;
-      dot.setAttribute('aria-label', `Ir a slide ${idx + 1}`);
+      dot.setAttribute('aria-label', `Ir a diapositiva ${idx + 1}`);
       dot.addEventListener('click', () => goToSlide(idx));
       dotsContainer.appendChild(dot);
     });
@@ -233,6 +303,25 @@ function initHeroSlider() {
   if (nextBtn) nextBtn.addEventListener('click', nextSlide);
   if (prevBtn) prevBtn.addEventListener('click', prevSlide);
 
+  // Soporte básico para swipe táctil en móvil
+  if (slider) {
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    slider.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    slider.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      if (touchStartX - touchEndX > 45) {
+        nextSlide();
+      } else if (touchEndX - touchStartX > 45) {
+        prevSlide();
+      }
+    }, { passive: true });
+  }
+
   resetTimer();
 }
 
@@ -247,6 +336,7 @@ function initContentModals() {
 
   function closeModal() {
     backdrop.classList.remove('open');
+    document.body.classList.remove('menu-open');
   }
 
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
@@ -273,22 +363,23 @@ function openNewsModal(newsId) {
 
   body.innerHTML = `
     <span class="news-badge" style="position: static; display: inline-block; margin-bottom: 0.8rem;">${escapeHtml(article.categoryLabel)}</span>
-    <h2 style="font-size: 2.1rem; color: var(--clr-navy); margin-bottom: 0.8rem; line-height: 1.2;">${escapeHtml(article.title)}</h2>
-    <div style="font-size: 0.88rem; color: var(--clr-text-light); margin-bottom: 1.4rem;">
+    <h2 style="font-size: clamp(1.6rem, 3.5vw, 2.2rem); color: var(--clr-navy); margin-bottom: 0.8rem; line-height: 1.2;">${escapeHtml(article.title)}</h2>
+    <div style="font-size: 0.85rem; color: var(--clr-text-light); margin-bottom: 1.3rem;">
       Publicado el ${escapeHtml(article.date)} • ${escapeHtml(article.readTime)} • Vicariato de Bolivia
     </div>
-    <div style="border-radius: var(--radius-md); overflow: hidden; margin-bottom: 1.5rem; max-height: 380px;">
+    <div style="border-radius: var(--radius-md); overflow: hidden; margin-bottom: 1.4rem; max-height: 360px;">
       <img src="${article.thumb}" alt="${escapeHtml(article.title)}" style="width: 100%; height: 100%; object-fit: cover;">
     </div>
-    <div style="font-size: 1.05rem; line-height: 1.8; color: var(--clr-text); white-space: pre-line;">
+    <div style="font-size: clamp(0.95rem, 1.4vw, 1.05rem); line-height: 1.8; color: var(--clr-text); white-space: pre-line;">
       ${escapeHtml(article.content)}
     </div>
-    <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--clr-border-light); display: flex; justify-content: space-between; align-items: center; flex-wrap: gap: 1rem;">
+    <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--clr-border-light); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
       <span style="font-size: 0.85rem; color: var(--clr-text-muted);">¿Quieres más información o colaborar?</span>
       <a href="contacto.html" class="btn btn-primary" style="padding: 0.6rem 1.4rem; font-size: 0.86rem;">Contactar</a>
     </div>
   `;
 
+  document.body.classList.add('menu-open');
   backdrop.classList.add('open');
 }
 
@@ -302,26 +393,27 @@ function openSaintModal(saintId) {
   if (!backdrop || !body) return;
 
   body.innerHTML = `
-    <div style="display: inline-block; padding: 0.3rem 0.8rem; border-radius: var(--radius-full); background: var(--clr-gold-soft); color: var(--clr-gold); font-size: 0.8rem; font-weight: 800; text-transform: uppercase; margin-bottom: 0.8rem;">
+    <div style="display: inline-block; padding: 0.3rem 0.8rem; border-radius: var(--radius-full); background: var(--clr-gold-soft); color: var(--clr-gold); font-size: 0.78rem; font-weight: 800; text-transform: uppercase; margin-bottom: 0.8rem;">
       Fiesta: ${escapeHtml(saint.feast)}
     </div>
-    <h2 style="font-size: 2.3rem; color: var(--clr-navy); margin-bottom: 0.4rem;">${escapeHtml(saint.name)}</h2>
-    <p style="font-size: 1.05rem; color: var(--clr-primary); font-weight: 600; margin-bottom: 1.5rem;">${escapeHtml(saint.title)}</p>
+    <h2 style="font-size: clamp(1.7rem, 3.8vw, 2.3rem); color: var(--clr-navy); margin-bottom: 0.4rem;">${escapeHtml(saint.name)}</h2>
+    <p style="font-size: 1rem; color: var(--clr-primary); font-weight: 600; margin-bottom: 1.35rem;">${escapeHtml(saint.title)}</p>
     
-    <div style="padding: 1.4rem 1.6rem; border-left: 4px solid var(--clr-primary); background: var(--clr-primary-soft); font-family: var(--font-serif); font-size: 1.22rem; font-style: italic; color: var(--clr-navy); margin-bottom: 1.8rem; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
+    <div style="padding: 1.25rem 1.4rem; border-left: 4px solid var(--clr-primary); background: var(--clr-primary-soft); font-family: var(--font-serif); font-size: clamp(1.1rem, 2vw, 1.25rem); font-style: italic; color: var(--clr-navy); margin-bottom: 1.5rem; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
       "${escapeHtml(saint.quote)}"
     </div>
 
     <h4 style="font-size: 1.15rem; color: var(--clr-navy); margin-bottom: 0.65rem;">Semblanza e Inspiración</h4>
-    <p style="font-size: 1.02rem; line-height: 1.8; color: var(--clr-text-muted); margin-bottom: 2rem;">
+    <p style="font-size: clamp(0.95rem, 1.4vw, 1.02rem); line-height: 1.8; color: var(--clr-text-muted); margin-bottom: 2rem;">
       ${escapeHtml(saint.bio)}
     </p>
 
     <div style="text-align: right;">
-      <button class="btn btn-primary" onclick="document.getElementById('contentModalBackdrop').classList.remove('open')" style="padding: 0.6rem 1.6rem;">Cerrar</button>
+      <button class="btn btn-primary" onclick="document.getElementById('contentModalBackdrop').classList.remove('open'); document.body.classList.remove('menu-open');" style="padding: 0.6rem 1.6rem;">Cerrar</button>
     </div>
   `;
 
+  document.body.classList.add('menu-open');
   backdrop.classList.add('open');
 }
 
@@ -332,25 +424,26 @@ function openCommunityModal(comm) {
 
   body.innerHTML = `
     <span class="community-city-badge">${escapeHtml(comm.city)}</span>
-    <h2 style="font-size: 2rem; color: var(--clr-navy); margin-bottom: 0.5rem;">${escapeHtml(comm.name)}</h2>
-    <p style="font-size: 1rem; color: var(--clr-primary); font-weight: 600; margin-bottom: 1.5rem;">${escapeHtml(comm.role)}</p>
+    <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); color: var(--clr-navy); margin-bottom: 0.5rem;">${escapeHtml(comm.name)}</h2>
+    <p style="font-size: 0.96rem; color: var(--clr-primary); font-weight: 600; margin-bottom: 1.35rem;">${escapeHtml(comm.role)}</p>
     
-    <div style="border-radius: var(--radius-md); overflow: hidden; margin-bottom: 1.5rem; height: 260px;">
+    <div style="border-radius: var(--radius-md); overflow: hidden; margin-bottom: 1.35rem; height: clamp(180px, 25vw, 260px);">
       <img src="${comm.image}" alt="${escapeHtml(comm.name)}" style="width: 100%; height: 100%; object-fit: cover;">
     </div>
 
-    <p style="font-size: 1rem; line-height: 1.7; color: var(--clr-text-muted); margin-bottom: 1.5rem;">
+    <p style="font-size: 0.96rem; line-height: 1.7; color: var(--clr-text-muted); margin-bottom: 1.35rem;">
       ${escapeHtml(comm.description)}
     </p>
 
-    <div style="background: var(--clr-bg-alt); padding: 1.25rem; border-radius: var(--radius-md); display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.92rem;">
+    <div style="background: var(--clr-bg-alt); padding: 1.15rem; border-radius: var(--radius-md); display: flex; flex-direction: column; gap: 0.55rem; font-size: 0.88rem;">
       <div><strong>Dirección:</strong> ${escapeHtml(comm.address)}</div>
-      <div><strong>Teléfono:</strong> <a href="tel:${escapeHtml(comm.phone)}" style="color: var(--clr-primary);">${escapeHtml(comm.phone)}</a></div>
-      <div><strong>Email:</strong> <a href="mailto:${escapeHtml(comm.email)}" style="color: var(--clr-primary);">${escapeHtml(comm.email)}</a></div>
+      <div><strong>Teléfono:</strong> <a href="tel:${escapeHtml(comm.phone)}" style="color: var(--clr-primary); font-weight: 600;">${escapeHtml(comm.phone)}</a></div>
+      <div><strong>Email:</strong> <a href="mailto:${escapeHtml(comm.email)}" style="color: var(--clr-primary); font-weight: 600;">${escapeHtml(comm.email)}</a></div>
       <div><strong>Horarios / Misas:</strong> ${escapeHtml(comm.schedule)}</div>
     </div>
   `;
 
+  document.body.classList.add('menu-open');
   backdrop.classList.add('open');
 }
 
@@ -431,7 +524,7 @@ function initScrollReveal() {
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.1 });
 
     elements.forEach(el => observer.observe(el));
   } else {

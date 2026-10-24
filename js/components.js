@@ -1,6 +1,6 @@
 /**
  * Componentes Modulares Compartidos - Agustinos Bolivia
- * Renderiza Topbar, Header con Mega-Menú, Modal de Búsqueda y Footer
+ * Renderiza Topbar, Header con Mega-Menú, Modal de Búsqueda, Backdrop Móvil y Footer
  */
 
 function renderInstitutionalHeader(activePage = 'inicio', basePath = '') {
@@ -10,7 +10,7 @@ function renderInstitutionalHeader(activePage = 'inicio', basePath = '') {
         <div class="topbar-left">
           <span class="topbar-badge">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-            Orden de San Agustín • Vicariato de Bolivia
+            <span class="text-full">Orden de San Agustín • </span>
           </span>
           <a href="tel:+59122311580" class="topbar-info hide-tablet">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -28,9 +28,9 @@ function renderInstitutionalHeader(activePage = 'inicio', basePath = '') {
             <a href="${basePath}pages/contacto.html#colabora">Colabora</a>
           </div>
           <div class="topbar-socials">
-            <a href="https://facebook.com" target="_blank" rel="noopener" title="Facebook"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-            <a href="https://instagram.com" target="_blank" rel="noopener" title="Instagram"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
-            <a href="https://youtube.com" target="_blank" rel="noopener" title="YouTube"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><polygon points="10 15 15 12 10 9 10 15"/></svg></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+            <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><polygon points="10 15 15 12 10 9 10 15"/></svg></a>
           </div>
         </div>
       </div>
@@ -42,8 +42,7 @@ function renderInstitutionalHeader(activePage = 'inicio', basePath = '') {
       <div class="container header-inner">
         <a href="${basePath}index.html" class="brand-logo" aria-label="Inicio Agustinos Bolivia">
           <div class="brand-crest">
-            <!-- Escudo Agustiniano: Corazón atravesado por flecha sobre libro abierto -->
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2">
               <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
               <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
               <path d="M12 7c-2-2.5-4-1-4 1.5 0 2 4 4.5 4 4.5s4-2.5 4-4.5c0-2.5-2-4-4-1.5z" fill="#C59B27" stroke="#C59B27"/>
@@ -55,14 +54,22 @@ function renderInstitutionalHeader(activePage = 'inicio', basePath = '') {
           </div>
         </a>
 
-        <nav class="main-nav" id="mainNav">
+        <!-- Menú de Navegación (Desktop y Drawer Móvil) -->
+        <nav class="main-nav" id="mainNav" aria-label="Navegación principal">
+          <div class="mobile-nav-header hide-desktop">
+            <div style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700; color: var(--clr-navy);">
+              MENÚ AGUSTINOS
+            </div>
+            <button class="mobile-nav-close" id="mobileNavClose" aria-label="Cerrar menú">✕</button>
+          </div>
+
           <div class="nav-item">
             <a href="${basePath}index.html" class="nav-link ${activePage === 'inicio' ? 'active' : ''}">Inicio</a>
           </div>
 
-          <div class="nav-item">
+          <div class="nav-item has-dropdown">
             <a href="${basePath}pages/quienes-somos.html" class="nav-link ${activePage === 'quienes-somos' ? 'active' : ''}">
-              Quiénes somos
+              <span>Quiénes somos</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
             </a>
             <div class="dropdown-menu mega-menu">
@@ -85,9 +92,9 @@ function renderInstitutionalHeader(activePage = 'inicio', basePath = '') {
             </div>
           </div>
 
-          <div class="nav-item">
+          <div class="nav-item has-dropdown">
             <a href="${basePath}pages/que-hacemos.html" class="nav-link ${activePage === 'que-hacemos' ? 'active' : ''}">
-              Qué hacemos
+              <span>Qué hacemos</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
             </a>
             <div class="dropdown-menu">
@@ -100,9 +107,9 @@ function renderInstitutionalHeader(activePage = 'inicio', basePath = '') {
             </div>
           </div>
 
-          <div class="nav-item">
+          <div class="nav-item has-dropdown">
             <a href="${basePath}pages/ser-agustino.html" class="nav-link ${activePage === 'ser-agustino' ? 'active' : ''}">
-              Ser Agustino
+              <span>Ser Agustino</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
             </a>
             <div class="dropdown-menu">
@@ -124,20 +131,24 @@ function renderInstitutionalHeader(activePage = 'inicio', basePath = '') {
           </div>
         </nav>
 
+        <!-- Acciones: Buscador, CTA y Menú Hamburguesa -->
         <div class="header-actions">
           <button class="search-trigger" id="globalSearchTrigger" aria-label="Abrir buscador global" title="Buscar">
-            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/></svg>
           </button>
-          <a href="${basePath}pages/ser-agustino.html#discernimiento" class="btn-header-cta">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <a href="${basePath}pages/ser-agustino.html#discernimiento" class="btn-header-cta" title="Vocaciones">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
             <span>Ser Agustino</span>
           </a>
-          <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Alternar menú">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
+          <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Abrir menú de navegación">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
           </button>
         </div>
       </div>
     </header>
+
+    <!-- Fondo Oscuro Backdrop para menú móvil -->
+    <div class="mobile-nav-backdrop" id="mobileNavBackdrop"></div>
   `;
 
   return topbarHTML + headerHTML;
@@ -149,15 +160,15 @@ function renderInstitutionalFooter(basePath = '') {
       <div class="container footer-grid">
         <div>
           <div class="brand-logo" style="margin-bottom: 0.5rem;">
-            <div class="brand-crest" style="width: 44px; height: 44px;">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2">
+            <div class="brand-crest" style="width: 42px; height: 42px;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2">
                 <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
                 <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
                 <path d="M12 7c-2-2.5-4-1-4 1.5 0 2 4 4.5 4 4.5s4-2.5 4-4.5c0-2.5-2-4-4-1.5z" fill="#C59B27"/>
               </svg>
             </div>
             <div class="brand-text">
-              <span class="brand-title" style="color: #FFFFFF; font-size: 1.35rem;">AGUSTINOS</span>
+              <span class="brand-title" style="color: #FFFFFF; font-size: 1.3rem;">AGUSTINOS</span>
               <span class="brand-subtitle" style="color: var(--clr-gold-light);">Vicariato de Bolivia • O.S.A.</span>
             </div>
           </div>
@@ -209,8 +220,8 @@ function renderInstitutionalFooter(basePath = '') {
               <span>vicariato@agustinosbolivia.org</span>
             </div>
           </div>
-          <div style="margin-top: 1.25rem;">
-            <a href="${basePath}pages/contacto.html#colabora" class="btn btn-gold" style="padding: 0.65rem 1.4rem; font-size: 0.85rem; width: 100%;">
+          <div style="margin-top: 1.15rem;">
+            <a href="${basePath}pages/contacto.html#colabora" class="btn btn-gold" style="padding: 0.65rem 1.25rem; font-size: 0.84rem; width: 100%;">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
               Colabora con nuestras Obras
             </a>
@@ -239,8 +250,8 @@ function renderModalsAndOverlays() {
     <div class="search-overlay" id="searchOverlay" aria-modal="true" role="dialog">
       <div class="search-modal">
         <div class="search-modal-header">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/></svg>
-          <input type="text" id="globalSearchInput" placeholder="Buscar colegios, noticias, santos, comunidades en Bolivia..." autofocus autocomplete="off" />
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/></svg>
+          <input type="text" id="globalSearchInput" placeholder="Buscar colegios, noticias, santos, comunidades..." autocomplete="off" />
           <button class="search-close-btn" id="closeSearchBtn" aria-label="Cerrar buscador">✕</button>
         </div>
         <div class="search-modal-body" id="searchResultsContainer">
